@@ -1,0 +1,1851 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/18/2024 8:20:39 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="UKWWHDSQLWI099"
+  DTS:CreatorName="UK\PAM-WMS-Migration"
+  DTS:DTSID="{2354BB58-EDF5-4F3B-8BB8-755BBF8DD92E}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5270.0"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="72"
+  DTS:VersionGUID="{67DE83B7-DF41-4555-A67D-303FCC797F99}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3480AF42-C14B-47D9-B690-A9CF9C0A2386}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="varRunID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\reprocess Title load errors"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{5F4A90AA-23A0-413D-8F18-C75720C19D3C}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="reprocess Title load errors">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\reprocess Title load errors\Reprocess Title load errors"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{4E1A0EE4-1947-4940-8704-1F91F85FD2DD}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Reprocess Title load errors"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Read title records"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[transform].[titles_staging]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT titl.[ISBN]
+      ,titl.[Created On]
+      ,titl.[Plant]
+      ,titl.[Storage Location]
+      ,titl.[Supply Edition]
+      ,titl.[Answer Code Text]
+      ,titl.[Original Pub Date of Product]
+      ,titl.[Finance publisher description]
+      ,titl.[Finance imprint description]
+      ,titl.[Export Pub Date of Product]
+      ,titl.[Binding]
+      ,titl.[Binding Description]
+      ,titl.[ISBN_SuppEd]
+      ,titl.[by_payload_filler]
+      ,titl.[answer_code]
+      ,titl.[title_long_desc]
+      ,titl.[commodity_code]
+      ,titl.[commodity_code2]
+      ,titl.[se_publication_date]
+      ,titl.[se_publication_price]
+      ,titl.[author]
+      ,titl.[finance_publisher]
+      ,titl.[finance_imprint]
+      ,titl.[country_of_origin]
+      ,titl.[resultant_payload]
+      ,titl.[run_id]
+      ,titl.[record_number]
+      ,titl.[PackFlag]
+      ,titl.[PackHeight]
+      ,titl.[PackWeight]
+      ,titl.[PackWidth]
+      ,titl.[PackDepth]
+      ,titl.[PackagingType]
+      ,titl.[PickPackMethod]
+      ,titl.[BookHeight]
+      ,titl.[BookWeight]
+      ,titl.[BookWidth]
+      ,titl.[BookDepth]
+      ,titl.[LayersPerPallet]
+      ,titl.[MaxBooksPallet]
+      ,titl.[PackSize]
+  FROM [final].[titles] titl
+  JOIN transform.title_load_results ldsm
+				ON ldsm.event_prtnum = titl.ISBN_SuppEd
+				 AND ldsm.[Event Status] != 'Event Sent';</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Connections[OleDbConnection]"
+                      connectionManagerID="{289B9455-1F1F-4F28-9FFF-B71E1FA762B0}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[ISBN]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[ISBN]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[ISBN]"
+                          name="ISBN"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Created On]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Created On]"
+                          name="Created On"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Plant]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Plant]"
+                          name="Plant"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Storage Location]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Storage Location]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Storage Location]"
+                          name="Storage Location"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Supply Edition]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Supply Edition]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Supply Edition]"
+                          name="Supply Edition"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Answer Code Text]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Answer Code Text]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Answer Code Text]"
+                          name="Answer Code Text"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Original Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Original Pub Date of Product]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Original Pub Date of Product]"
+                          name="Original Pub Date of Product"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Finance publisher description]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Finance publisher description]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Finance publisher description]"
+                          name="Finance publisher description"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Finance imprint description]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Finance imprint description]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Finance imprint description]"
+                          name="Finance imprint description"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Export Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Export Pub Date of Product]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Export Pub Date of Product]"
+                          name="Export Pub Date of Product"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Binding]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Binding]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Binding]"
+                          name="Binding"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Binding Description]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Binding Description]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Binding Description]"
+                          name="Binding Description"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[ISBN_SuppEd]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[ISBN_SuppEd]"
+                          length="101"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[ISBN_SuppEd]"
+                          name="ISBN_SuppEd"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[by_payload_filler]"
+                          length="4000"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[by_payload_filler]"
+                          name="by_payload_filler"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[answer_code]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[answer_code]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[answer_code]"
+                          name="answer_code"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[title_long_desc]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[title_long_desc]"
+                          length="500"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[title_long_desc]"
+                          name="title_long_desc"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[commodity_code]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[commodity_code]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[commodity_code]"
+                          name="commodity_code"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[commodity_code2]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[commodity_code2]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[commodity_code2]"
+                          name="commodity_code2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[se_publication_date]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[se_publication_date]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[se_publication_date]"
+                          name="se_publication_date"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[se_publication_price]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[se_publication_price]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[se_publication_price]"
+                          name="se_publication_price"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[author]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[author]"
+                          length="500"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[author]"
+                          name="author"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[finance_publisher]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[finance_publisher]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[finance_publisher]"
+                          name="finance_publisher"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[finance_imprint]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[finance_imprint]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[finance_imprint]"
+                          name="finance_imprint"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[country_of_origin]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[country_of_origin]"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[country_of_origin]"
+                          name="country_of_origin"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[resultant_payload]"
+                          length="8000"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[resultant_payload]"
+                          name="resultant_payload"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[run_id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[run_id]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[run_id]"
+                          name="run_id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[record_number]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[record_number]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[record_number]"
+                          name="record_number"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackFlag]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackFlag]"
+                          length="1"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackFlag]"
+                          name="PackFlag"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackHeight]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackHeight]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackHeight]"
+                          name="PackHeight"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackWeight]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackWeight]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackWeight]"
+                          name="PackWeight"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackWidth]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackWidth]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackWidth]"
+                          name="PackWidth"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackDepth]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackDepth]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackDepth]"
+                          name="PackDepth"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackagingType]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackagingType]"
+                          length="1"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackagingType]"
+                          name="PackagingType"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PickPackMethod]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PickPackMethod]"
+                          length="1"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PickPackMethod]"
+                          name="PickPackMethod"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[BookHeight]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookHeight]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[BookHeight]"
+                          name="BookHeight"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[BookWeight]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookWeight]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[BookWeight]"
+                          name="BookWeight"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[BookWidth]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookWidth]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[BookWidth]"
+                          name="BookWidth"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[BookDepth]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookDepth]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[BookDepth]"
+                          name="BookDepth"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[LayersPerPallet]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[LayersPerPallet]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[LayersPerPallet]"
+                          name="LayersPerPallet"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[MaxBooksPallet]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[MaxBooksPallet]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[MaxBooksPallet]"
+                          name="MaxBooksPallet"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackSize]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackSize]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackSize]"
+                          name="PackSize"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[ISBN]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ISBN" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Created On" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Plant" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Storage Location]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Storage Location" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Supply Edition]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Supply Edition" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Answer Code Text]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Answer Code Text" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Original Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Original Pub Date of Product" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Finance publisher description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Finance publisher description" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Finance imprint description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Finance imprint description" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Export Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Export Pub Date of Product" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Binding]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Binding" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Binding Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Binding Description" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[ISBN_SuppEd]"
+                          codePage="1252"
+                          dataType="str"
+                          length="101"
+                          name="ISBN_SuppEd" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="by_payload_filler" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[answer_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="answer_code" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[title_long_desc]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="title_long_desc" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[commodity_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="commodity_code" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[commodity_code2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="commodity_code2" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[se_publication_date]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="se_publication_date" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[se_publication_price]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="se_publication_price" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[author]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="author" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[finance_publisher]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="finance_publisher" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[finance_imprint]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="finance_imprint" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[country_of_origin]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="country_of_origin" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          name="resultant_payload" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[run_id]"
+                          dataType="i4"
+                          name="run_id" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[record_number]"
+                          dataType="i8"
+                          name="record_number" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackFlag]"
+                          dataType="wstr"
+                          length="1"
+                          name="PackFlag" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackHeight]"
+                          dataType="i4"
+                          name="PackHeight" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackWeight]"
+                          dataType="i4"
+                          name="PackWeight" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackWidth]"
+                          dataType="i4"
+                          name="PackWidth" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackDepth]"
+                          dataType="i4"
+                          name="PackDepth" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackagingType]"
+                          dataType="wstr"
+                          length="1"
+                          name="PackagingType" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PickPackMethod]"
+                          dataType="wstr"
+                          length="1"
+                          name="PickPackMethod" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookHeight]"
+                          dataType="i4"
+                          name="BookHeight" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookWeight]"
+                          dataType="i4"
+                          name="BookWeight" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookWidth]"
+                          dataType="i4"
+                          name="BookWidth" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookDepth]"
+                          dataType="i4"
+                          name="BookDepth" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[LayersPerPallet]"
+                          dataType="i4"
+                          name="LayersPerPallet" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[MaxBooksPallet]"
+                          dataType="i4"
+                          name="MaxBooksPallet" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackSize]"
+                          dataType="i4"
+                          name="PackSize" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[record_number]"
+                          dataType="i8"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[record_number]"
+                          name="record_number" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[run_id]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[run_id]"
+                          name="run_id" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[ISBN]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[ISBN]"
+                          name="ISBN" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Created On]"
+                          name="Created On" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Plant]"
+                          name="Plant" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Storage Location]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Storage Location]"
+                          name="Storage Location" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Supply Edition]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Supply Edition]"
+                          name="Supply Edition" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Answer Code Text]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Answer Code Text]"
+                          name="Answer Code Text" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[answer_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[answer_code]"
+                          name="answer_code" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Original Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Original Pub Date of Product]"
+                          name="Original Pub Date of Product" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[title_long_desc]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[title_long_desc]"
+                          name="title_long_desc" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Finance publisher description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Finance publisher description]"
+                          name="Finance publisher description" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[commodity_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[commodity_code]"
+                          name="commodity_code" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[commodity_code2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[commodity_code2]"
+                          name="commodity_code2" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[se_publication_date]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[se_publication_date]"
+                          name="se_publication_date" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[se_publication_price]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[se_publication_price]"
+                          name="se_publication_price" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[author]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[author]"
+                          name="author" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[finance_publisher]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[finance_publisher]"
+                          name="finance_publisher" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Finance imprint description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Finance imprint description]"
+                          name="Finance imprint description" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[finance_imprint]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[finance_imprint]"
+                          name="finance_imprint" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Export Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Export Pub Date of Product]"
+                          name="Export Pub Date of Product" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Binding]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Binding]"
+                          name="Binding" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Binding Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[Binding Description]"
+                          name="Binding Description" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[ISBN_SuppEd]"
+                          codePage="1252"
+                          dataType="str"
+                          length="101"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[ISBN_SuppEd]"
+                          name="ISBN_SuppEd" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[country_of_origin]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[country_of_origin]"
+                          name="country_of_origin" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PackFlag]"
+                          dataType="wstr"
+                          length="1"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PackFlag]"
+                          name="PackFlag" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PackHeight]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PackHeight]"
+                          name="PackHeight" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PackWeight]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PackWeight]"
+                          name="PackWeight" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PackWidth]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PackWidth]"
+                          name="PackWidth" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PackDepth]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PackDepth]"
+                          name="PackDepth" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PackSize]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PackSize]"
+                          name="PackSize" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PackagingType]"
+                          dataType="wstr"
+                          length="1"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PackagingType]"
+                          name="PackagingType" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PickPackMethod]"
+                          dataType="wstr"
+                          length="1"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[PickPackMethod]"
+                          name="PickPackMethod" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[BookHeight]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[BookHeight]"
+                          name="BookHeight" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[BookWeight]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[BookWeight]"
+                          name="BookWeight" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[BookWidth]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[BookWidth]"
+                          name="BookWidth" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[BookDepth]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[BookDepth]"
+                          name="BookDepth" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[LayersPerPallet]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[LayersPerPallet]"
+                          name="LayersPerPallet" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[MaxBooksPallet]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[MaxBooksPallet]"
+                          name="MaxBooksPallet" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[by_payload_filler]"
+                          name="by_payload_filler" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[resultant_payload]"
+                          name="resultant_payload" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="reprocess_title_errors"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[final].[reprocess_title_errors]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Connections[OleDbConnection]"
+                      connectionManagerID="{289B9455-1F1F-4F28-9FFF-B71E1FA762B0}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[ISBN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="ISBN"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[ISBN]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[ISBN]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[Created On]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Created On"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Created On]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Created On]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[Plant]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Plant"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Plant]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Plant]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[Storage Location]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Storage Location"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Storage Location]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Storage Location]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[Supply Edition]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Supply Edition"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Supply Edition]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Supply Edition]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[Answer Code Text]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Answer Code Text"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Answer Code Text]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Answer Code Text]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[Original Pub Date of Product]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Original Pub Date of Product"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Original Pub Date of Product]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Original Pub Date of Product]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[Finance publisher description]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Finance publisher description"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Finance publisher description]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Finance publisher description]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[Finance imprint description]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Finance imprint description"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Finance imprint description]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Finance imprint description]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[Export Pub Date of Product]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Export Pub Date of Product"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Export Pub Date of Product]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Export Pub Date of Product]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[Binding]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Binding"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Binding]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Binding]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[Binding Description]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Binding Description"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Binding Description]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[Binding Description]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[ISBN_SuppEd]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="101"
+                          cachedName="ISBN_SuppEd"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[ISBN_SuppEd]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[ISBN_SuppEd]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[answer_code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="answer_code"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[answer_code]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[answer_code]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[title_long_desc]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="title_long_desc"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[title_long_desc]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[title_long_desc]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[commodity_code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="commodity_code"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[commodity_code]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[commodity_code]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[commodity_code2]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="commodity_code2"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[commodity_code2]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[commodity_code2]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[se_publication_date]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="se_publication_date"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[se_publication_date]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[se_publication_date]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[se_publication_price]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="se_publication_price"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[se_publication_price]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[se_publication_price]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[author]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="author"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[author]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[author]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[finance_publisher]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="finance_publisher"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[finance_publisher]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[finance_publisher]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[finance_imprint]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="finance_imprint"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[finance_imprint]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[finance_imprint]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[country_of_origin]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="country_of_origin"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[country_of_origin]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[country_of_origin]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[resultant_payload]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="8000"
+                          cachedName="resultant_payload"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[resultant_payload]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[run_id]"
+                          cachedDataType="i4"
+                          cachedName="run_id"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[run_id]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[record_number]"
+                          cachedDataType="i8"
+                          cachedName="record_number"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[record_number]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[PackFlag]"
+                          cachedDataType="wstr"
+                          cachedLength="1"
+                          cachedName="PackFlag"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackFlag]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackFlag]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[PackHeight]"
+                          cachedDataType="i4"
+                          cachedName="PackHeight"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackHeight]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackHeight]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[PackWeight]"
+                          cachedDataType="i4"
+                          cachedName="PackWeight"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackWeight]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackWeight]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[PackWidth]"
+                          cachedDataType="i4"
+                          cachedName="PackWidth"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackWidth]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackWidth]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[PackDepth]"
+                          cachedDataType="i4"
+                          cachedName="PackDepth"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackDepth]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackDepth]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[PackagingType]"
+                          cachedDataType="wstr"
+                          cachedLength="1"
+                          cachedName="PackagingType"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackagingType]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackagingType]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[PickPackMethod]"
+                          cachedDataType="wstr"
+                          cachedLength="1"
+                          cachedName="PickPackMethod"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PickPackMethod]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PickPackMethod]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[BookHeight]"
+                          cachedDataType="i4"
+                          cachedName="BookHeight"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookHeight]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[BookHeight]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[BookWeight]"
+                          cachedDataType="i4"
+                          cachedName="BookWeight"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookWeight]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[BookWeight]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[BookWidth]"
+                          cachedDataType="i4"
+                          cachedName="BookWidth"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookWidth]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[BookWidth]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[BookDepth]"
+                          cachedDataType="i4"
+                          cachedName="BookDepth"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookDepth]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[BookDepth]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[LayersPerPallet]"
+                          cachedDataType="i4"
+                          cachedName="LayersPerPallet"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[LayersPerPallet]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[LayersPerPallet]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[MaxBooksPallet]"
+                          cachedDataType="i4"
+                          cachedName="MaxBooksPallet"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[MaxBooksPallet]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[MaxBooksPallet]" />
+                        <inputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].Columns[PackSize]"
+                          cachedDataType="i4"
+                          cachedName="PackSize"
+                          externalMetadataColumnId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output].Columns[PackSize]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[ISBN]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ISBN" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Created On" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Plant" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Storage Location]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Storage Location" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Supply Edition]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Supply Edition" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Answer Code Text]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Answer Code Text" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Original Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Original Pub Date of Product" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Finance publisher description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Finance publisher description" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Finance imprint description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Finance imprint description" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Export Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Export Pub Date of Product" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Binding]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Binding" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[Binding Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Binding Description" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[ISBN_SuppEd]"
+                          codePage="1252"
+                          dataType="str"
+                          length="101"
+                          name="ISBN_SuppEd" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[answer_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="answer_code" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[title_long_desc]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="title_long_desc" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[commodity_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="commodity_code" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[commodity_code2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="commodity_code2" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[se_publication_date]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="se_publication_date" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[se_publication_price]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="se_publication_price" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[author]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="author" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[finance_publisher]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="finance_publisher" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[finance_imprint]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="finance_imprint" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[country_of_origin]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="country_of_origin" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          name="resultant_payload" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
+                          dataType="i4"
+                          name="run_id" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="by_payload_filler" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
+                          dataType="i8"
+                          name="record_number" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackFlag]"
+                          dataType="wstr"
+                          length="1"
+                          name="PackFlag" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackHeight]"
+                          dataType="i4"
+                          name="PackHeight" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackWeight]"
+                          dataType="i4"
+                          name="PackWeight" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackWidth]"
+                          dataType="i4"
+                          name="PackWidth" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackDepth]"
+                          dataType="i4"
+                          name="PackDepth" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackagingType]"
+                          dataType="wstr"
+                          length="1"
+                          name="PackagingType" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PickPackMethod]"
+                          dataType="wstr"
+                          length="1"
+                          name="PickPackMethod" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookHeight]"
+                          dataType="i4"
+                          name="BookHeight" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookWeight]"
+                          dataType="i4"
+                          name="BookWeight" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookWidth]"
+                          dataType="i4"
+                          name="BookWidth" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookDepth]"
+                          dataType="i4"
+                          name="BookDepth" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[LayersPerPallet]"
+                          dataType="i4"
+                          name="LayersPerPallet" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[MaxBooksPallet]"
+                          dataType="i4"
+                          name="MaxBooksPallet" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
+                          dataType="i4"
+                          name="PackSize" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\reprocess Title load errors\Reprocess Title load errors.Paths[OLE DB Source Output]"
+                  endId="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\reprocess Title load errors\Reprocess Title load errors\Read title records.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\reprocess Title load errors\Truncate"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{5B3C8C90-C0A3-4556-B62F-31BE47A24A7F}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{289B9455-1F1F-4F28-9FFF-B71E1FA762B0}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE final.reprocess_title_errors;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\reprocess Title load errors.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{5DC42BA3-B1AB-48CB-B2C6-93A55BA9EA75}"
+          DTS:From="Package\reprocess Title load errors\Truncate"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\reprocess Title load errors\Reprocess Title load errors" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="208,42.6666666666667"
+          Id="Package\reprocess Title load errors\Reprocess Title load errors"
+          TopLeft="31.2083304741731,112.59649509164" />
+        <NodeLayout
+          Size="121.333333333334,42.6666666666667"
+          Id="Package\reprocess Title load errors\Truncate"
+          TopLeft="69.3333299060663,12.7017563692641" />
+        <EdgeLayout
+          Id="Package\reprocess Title load errors.PrecedenceConstraints[Constraint]"
+          TopLeft="132.604163523453,55.3684230359308">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57.2280720557095"
+              Start="0,0"
+              End="0,49.7280720557095">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.7280720557095" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="244,210"
+          Size="244,253.333333333334"
+          Id="Package\reprocess Title load errors"
+          TopLeft="66.3333286394679,32.6315794109968" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\reprocess Title load errors\Reprocess Title load errors">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="182.666666666667,42.6666666666667"
+          Id="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors"
+          TopLeft="496.249992605299,121.105265437401" />
+        <NodeLayout
+          Size="162.666666666667,42.6666666666667"
+          Id="Package\reprocess Title load errors\Reprocess Title load errors\Read title records"
+          TopLeft="116.874998258427,117.684212741429" />
+        <EdgeLayout
+          Id="Package\reprocess Title load errors\Reprocess Title load errors.Paths[OLE DB Source Output]"
+          TopLeft="279.541664925094,140.728072422748">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="216.708327680205,0"
+              Start="0,0"
+              End="209.208327680205,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="209.208327680205,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\reprocess Title load errors\Reprocess Title load errors\reprocess_title_errors">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\reprocess Title load errors\Reprocess Title load errors\Read title records">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

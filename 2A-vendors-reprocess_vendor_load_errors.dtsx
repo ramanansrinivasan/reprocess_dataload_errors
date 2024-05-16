@@ -1,0 +1,1742 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/18/2024 8:20:39 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="UKWWHDSQLWI099"
+  DTS:CreatorName="UK\PAM-WMS-Migration"
+  DTS:DTSID="{F3089493-3535-43F7-A94D-CD32FB1B3911}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5270.0"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="77"
+  DTS:VersionGUID="{9BB79B43-D991-4F80-AE28-A934538E5333}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{54DDADD4-6B2B-4119-9256-8944BA74113A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="varRunID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\reprocess vendor load errors"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{7672D282-FC90-4E8F-BFE6-A0416DFCAD42}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="reprocess vendor load errors">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\reprocess vendor load errors\reprocess vendor load errors"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{C23A31DF-BB7E-456A-AAE5-E2D780AD5E28}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="reprocess vendor load errors"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Read vendor records"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[transform].[titles_staging]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT supp.[run_id]
+      ,supp.[record_number]
+      ,supp.[Created On]
+      ,supp.[Plant]
+      ,supp.[Vendor]
+      ,supp.[Purch  Organization]
+      ,supp.[Binder Code]
+      ,supp.[Country Key]
+      ,supp.[name1]
+      ,supp.[name2]
+      ,supp.[name3]
+      ,supp.[name4]
+      ,supp.[City]
+      ,supp.[PO Box]
+      ,supp.[P O  Box Postal Code]
+      ,supp.[Postal Code]
+      ,supp.[Region]
+      ,supp.[Search term]
+      ,supp.[Street and House No ]
+      ,supp.[Account Group]
+      ,supp.[Customer]
+      ,supp.[Language Key]
+      ,supp.[Telephone 1]
+      ,supp.[VAT Registration No ]
+      ,supp.[Sort key]
+      ,supp.[Reconciliation acct]
+      ,supp.[Payment methods]
+      ,supp.[Terms of Payment]
+      ,supp.[Previous account no ]
+      ,supp.[Credit memo pyt term]
+      ,supp.[Order currency]
+      ,supp.[main_tag_starter]
+      ,supp.[by_payload_filler]
+      ,supp.[resultant_payload]
+      ,supp.[main_tag_finisher]
+  FROM [DM_Dev_NP3].[final].[vendors] supp
+  JOIN transform.vendor_load_results ldsm
+				ON ldsm.event_supnum = supp.[Binder Code]
+				 AND ldsm.[Event Status] != 'Event Sent';</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Connections[OleDbConnection]"
+                      connectionManagerID="{289B9455-1F1F-4F28-9FFF-B71E1FA762B0}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Created On]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Created On]"
+                          name="Created On"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Plant]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Plant]"
+                          name="Plant"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[by_payload_filler]"
+                          length="4000"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[by_payload_filler]"
+                          name="by_payload_filler"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[resultant_payload]"
+                          length="8000"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[resultant_payload]"
+                          name="resultant_payload"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[run_id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[run_id]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[run_id]"
+                          name="run_id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[record_number]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[record_number]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[record_number]"
+                          name="record_number"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Vendor]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Vendor]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Vendor]"
+                          name="Vendor"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Purch  Organization]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Purch  Organization]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Purch  Organization]"
+                          name="Purch  Organization"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Binder Code]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Binder Code]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Binder Code]"
+                          name="Binder Code"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Country Key]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Country Key]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Country Key]"
+                          name="Country Key"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[name1]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name1]"
+                          length="500"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[name1]"
+                          name="name1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[name2]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name2]"
+                          length="500"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[name2]"
+                          name="name2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[name3]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name3]"
+                          length="500"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[name3]"
+                          name="name3"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[name4]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name4]"
+                          length="500"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[name4]"
+                          name="name4"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[City]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[City]"
+                          name="City"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[PO Box]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[PO Box]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[PO Box]"
+                          name="PO Box"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[P O  Box Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[P O  Box Postal Code]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[P O  Box Postal Code]"
+                          name="P O  Box Postal Code"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Postal Code]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Postal Code]"
+                          name="Postal Code"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Region]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Region]"
+                          name="Region"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Search term]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Search term]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Search term]"
+                          name="Search term"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Street and House No ]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Street and House No ]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Street and House No ]"
+                          name="Street and House No "
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Account Group]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Account Group]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Account Group]"
+                          name="Account Group"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Customer]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Customer]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Customer]"
+                          name="Customer"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Language Key]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Language Key]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Language Key]"
+                          name="Language Key"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Telephone 1]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Telephone 1]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Telephone 1]"
+                          name="Telephone 1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[VAT Registration No ]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[VAT Registration No ]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[VAT Registration No ]"
+                          name="VAT Registration No "
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Sort key]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Sort key]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Sort key]"
+                          name="Sort key"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Reconciliation acct]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Reconciliation acct]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Reconciliation acct]"
+                          name="Reconciliation acct"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Payment methods]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Payment methods]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Payment methods]"
+                          name="Payment methods"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Terms of Payment]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Terms of Payment]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Terms of Payment]"
+                          name="Terms of Payment"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Previous account no ]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Previous account no ]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Previous account no ]"
+                          name="Previous account no "
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Credit memo pyt term]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Credit memo pyt term]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Credit memo pyt term]"
+                          name="Credit memo pyt term"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Order currency]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Order currency]"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Order currency]"
+                          name="Order currency"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[main_tag_starter]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[main_tag_starter]"
+                          length="200"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[main_tag_starter]"
+                          name="main_tag_starter"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[main_tag_finisher]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[main_tag_finisher]"
+                          length="200"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[main_tag_finisher]"
+                          name="main_tag_finisher"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Created On" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Plant" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="by_payload_filler" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          name="resultant_payload" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[run_id]"
+                          dataType="i4"
+                          name="run_id" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[record_number]"
+                          dataType="i8"
+                          name="record_number" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Vendor]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Vendor" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Purch  Organization]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Purch  Organization" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Binder Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Binder Code" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Country Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Country Key" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name1" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name2" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name3" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name4]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name4" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="City" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[PO Box]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="PO Box" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[P O  Box Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="P O  Box Postal Code" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Postal Code" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Region" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Search term]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Search term" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Street and House No ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Street and House No " />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Account Group]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Account Group" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Customer]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Customer" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Language Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Language Key" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Telephone 1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Telephone 1" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[VAT Registration No ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="VAT Registration No " />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Sort key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Sort key" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Reconciliation acct]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Reconciliation acct" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Payment methods]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Payment methods" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Terms of Payment]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Terms of Payment" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Previous account no ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Previous account no " />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Credit memo pyt term]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Credit memo pyt term" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Order currency]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Order currency" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[main_tag_starter]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="main_tag_starter" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[main_tag_finisher]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="main_tag_finisher" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[record_number]"
+                          dataType="i8"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[record_number]"
+                          name="record_number" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[run_id]"
+                          dataType="i4"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[run_id]"
+                          name="run_id" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Vendor]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Vendor]"
+                          name="Vendor" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Purch  Organization]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Purch  Organization]"
+                          name="Purch  Organization" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Created On]"
+                          name="Created On" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Binder Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Binder Code]"
+                          name="Binder Code" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Country Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Country Key]"
+                          name="Country Key" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name1]"
+                          name="name1" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name2]"
+                          name="name2" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name3]"
+                          name="name3" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name4]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name4]"
+                          name="name4" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[City]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[City]"
+                          name="City" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[PO Box]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[PO Box]"
+                          name="PO Box" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[P O  Box Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[P O  Box Postal Code]"
+                          name="P O  Box Postal Code" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Postal Code]"
+                          name="Postal Code" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          name="Region" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Search term]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Search term]"
+                          name="Search term" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Street and House No ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Street and House No ]"
+                          name="Street and House No " />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Account Group]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Account Group]"
+                          name="Account Group" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Customer]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Customer]"
+                          name="Customer" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Language Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Language Key]"
+                          name="Language Key" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Telephone 1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Telephone 1]"
+                          name="Telephone 1" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[VAT Registration No ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[VAT Registration No ]"
+                          name="VAT Registration No " />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Plant]"
+                          name="Plant" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Sort key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Sort key]"
+                          name="Sort key" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Reconciliation acct]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Reconciliation acct]"
+                          name="Reconciliation acct" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Payment methods]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Payment methods]"
+                          name="Payment methods" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Terms of Payment]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Terms of Payment]"
+                          name="Terms of Payment" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Previous account no ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Previous account no ]"
+                          name="Previous account no " />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Credit memo pyt term]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Credit memo pyt term]"
+                          name="Credit memo pyt term" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Order currency]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Order currency]"
+                          name="Order currency" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[main_tag_starter]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[main_tag_starter]"
+                          name="main_tag_starter" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[by_payload_filler]"
+                          name="by_payload_filler" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[main_tag_finisher]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[main_tag_finisher]"
+                          name="main_tag_finisher" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[resultant_payload]"
+                          name="resultant_payload" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="reprocess_vendor_errors"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[final].[reprocess_vendor_errors]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Connections[OleDbConnection]"
+                      connectionManagerID="{289B9455-1F1F-4F28-9FFF-B71E1FA762B0}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Created On]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Created On"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Created On]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Created On]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Plant]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Plant"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Plant]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Plant]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[resultant_payload]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="8000"
+                          cachedName="resultant_payload"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[resultant_payload]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[run_id]"
+                          cachedDataType="i4"
+                          cachedName="run_id"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[run_id]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[record_number]"
+                          cachedDataType="i8"
+                          cachedName="record_number"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[record_number]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Vendor]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Vendor"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Vendor]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Vendor]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Purch  Organization]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Purch  Organization"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Purch  Organization]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Purch  Organization]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Binder Code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Binder Code"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Binder Code]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Binder Code]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Country Key]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Country Key"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Country Key]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Country Key]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[name1]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="name1"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[name1]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[name1]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[name2]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="name2"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[name2]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[name2]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[name3]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="name3"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[name3]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[name3]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[name4]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="name4"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[name4]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[name4]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[City]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="City"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[City]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[PO Box]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="PO Box"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[PO Box]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[PO Box]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[P O  Box Postal Code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="P O  Box Postal Code"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[P O  Box Postal Code]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[P O  Box Postal Code]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Postal Code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Postal Code"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Postal Code]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Postal Code]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Region]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Region"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Region]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Search term]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Search term"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Search term]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Search term]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Street and House No ]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Street and House No "
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Street and House No ]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Street and House No ]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Account Group]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Account Group"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Account Group]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Account Group]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Customer]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Customer"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Customer]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Customer]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Language Key]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Language Key"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Language Key]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Language Key]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Telephone 1]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Telephone 1"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Telephone 1]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Telephone 1]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[VAT Registration No ]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="VAT Registration No "
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[VAT Registration No ]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[VAT Registration No ]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Sort key]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Sort key"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Sort key]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Sort key]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Reconciliation acct]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Reconciliation acct"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Reconciliation acct]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Reconciliation acct]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Payment methods]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Payment methods"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Payment methods]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Payment methods]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Terms of Payment]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Terms of Payment"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Terms of Payment]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Terms of Payment]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Previous account no ]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Previous account no "
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Previous account no ]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Previous account no ]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Credit memo pyt term]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Credit memo pyt term"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Credit memo pyt term]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Credit memo pyt term]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[Order currency]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Order currency"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Order currency]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[Order currency]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[main_tag_starter]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="main_tag_starter"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_starter]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[main_tag_starter]" />
+                        <inputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].Columns[main_tag_finisher]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="main_tag_finisher"
+                          externalMetadataColumnId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_finisher]"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output].Columns[main_tag_finisher]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
+                          dataType="i4"
+                          name="run_id" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
+                          dataType="i8"
+                          name="record_number" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Created On" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Plant" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Vendor]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Vendor" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Purch  Organization]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Purch  Organization" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Binder Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Binder Code" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Country Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Country Key" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[name1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name1" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[name2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name2" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[name3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name3" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[name4]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name4" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="City" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[PO Box]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="PO Box" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[P O  Box Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="P O  Box Postal Code" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Postal Code" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Region" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Search term]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Search term" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Street and House No ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Street and House No " />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Account Group]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Account Group" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Customer]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Customer" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Language Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Language Key" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Telephone 1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Telephone 1" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[VAT Registration No ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="VAT Registration No " />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Sort key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Sort key" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Reconciliation acct]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Reconciliation acct" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Payment methods]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Payment methods" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Terms of Payment]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Terms of Payment" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Previous account no ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Previous account no " />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Credit memo pyt term]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Credit memo pyt term" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[Order currency]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Order currency" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_starter]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="main_tag_starter" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="by_payload_filler" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          name="resultant_payload" />
+                        <externalMetadataColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_finisher]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="main_tag_finisher" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\reprocess vendor load errors\reprocess vendor load errors.Paths[OLE DB Source Output]"
+                  endId="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\reprocess vendor load errors\Truncate"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{587832D5-98CE-45CD-95C0-9937B74571FA}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{289B9455-1F1F-4F28-9FFF-B71E1FA762B0}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE final.reprocess_vendor_errors;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\reprocess vendor load errors.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{DDFD79D6-DDEF-4009-872A-2E25FA5C7781}"
+          DTS:From="Package\reprocess vendor load errors\Truncate"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\reprocess vendor load errors\reprocess vendor load errors" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="216,42.6666666666667"
+          Id="Package\reprocess vendor load errors\reprocess vendor load errors"
+          TopLeft="22.4583306045583,110.543863474057" />
+        <NodeLayout
+          Size="121.333333333334,42.6666666666667"
+          Id="Package\reprocess vendor load errors\Truncate"
+          TopLeft="66.2083299526324,9.96491421248668" />
+        <EdgeLayout
+          Id="Package\reprocess vendor load errors.PrecedenceConstraints[Constraint]"
+          TopLeft="128.666663611929,52.6315808791533">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57.912282594904"
+              Start="0,0"
+              End="0,50.412282594904">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.412282594904" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="250,207.333333333334"
+          Size="250,250.666666666667"
+          Id="Package\reprocess vendor load errors"
+          TopLeft="126.874998109415,28.1140286870717" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\reprocess vendor load errors\reprocess vendor load errors">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="198.666666666667,42.6666666666667"
+          Id="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors"
+          TopLeft="478.749992866069,114.947370584652" />
+        <NodeLayout
+          Size="178.666666666667,42.6666666666667"
+          Id="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records"
+          TopLeft="116.874998258427,117.684212741429" />
+        <EdgeLayout
+          Id="Package\reprocess vendor load errors\reprocess vendor load errors.Paths[OLE DB Source Output]"
+          TopLeft="295.541664925094,137.649124996374">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="183.208327940975,0"
+              Start="0,0"
+              End="175.708327940975,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="175.708327940975,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\reprocess vendor load errors\reprocess vendor load errors\reprocess_vendor_errors">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\reprocess vendor load errors\reprocess vendor load errors\Read vendor records">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
